@@ -13,7 +13,7 @@ import java.util.*;
 
 @Service
 public class JwtProvider {
-    private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
     public String generateToken(Authentication auth){
         Collection<? extends GrantedAuthority>authorities=auth.getAuthorities();
         String roles =populateAuthorities(authorities);
