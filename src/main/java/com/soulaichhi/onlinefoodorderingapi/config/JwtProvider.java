@@ -2,6 +2,7 @@ package com.soulaichhi.onlinefoodorderingapi.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +13,7 @@ import java.util.*;
 
 @Service
 public class JwtProvider {
-    private SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET.getBytes());
+    private SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     public String generateToken(Authentication auth){
         Collection<? extends GrantedAuthority>authorities=auth.getAuthorities();
         String roles =populateAuthorities(authorities);
